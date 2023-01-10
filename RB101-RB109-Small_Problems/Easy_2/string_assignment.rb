@@ -1,0 +1,1 @@
+# The output is BOB, BOB because the method string#upcase! is mutating.  The reassignment from the first example simply creates a new variable that points to the object, whereas the mutating method creates a new object.
