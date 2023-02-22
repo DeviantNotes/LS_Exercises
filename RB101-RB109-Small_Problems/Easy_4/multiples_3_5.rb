@@ -1,31 +1,25 @@
-# define a range, 1-given number
-# create a counter for each 3 and 5, increment +3/+5
-# check if counter is less than the number, if so add it to an array
-# add together array and return
-
 require 'pry'
 require 'pry-doc'
 
-# My Solution (did not pass last test):
-def multisum(num)
-  threes = 3
-  fives = 5
-  range = 1..num
-  multiples = []
-  loop do
-    multiples << threes if range.include?(threes)
-    multiples << fives if range.include?(fives)
-    threes += 3
-    fives += 5
-    binding.pry
-    break unless range.include?(threes) && range.include?(fives)
-  end
-  multiples.sum
-end
+# My Solution:
+# def multisum(num)
+#   threes = 3
+#   fives = 5
+#   range = 1..num
+#   multiples = []
+#   loop do
+#     multiples << threes if threes <= num
+#     multiples << fives if fives <= num
+#     threes += 3
+#     fives += 5
+#     break if threes >= num && fives >= num
+#   end
+#   multiples.uniq.sum
+# end
 
 # LS Solution:
 # def multiple?(number, divisor)
-#   number % divisor == 0gi
+#   number % divisor == 0
 # end
 
 # def multisum(max_value)
@@ -38,7 +32,18 @@ end
 #   sum
 # end
 
-# puts multisum(3) == 3
-# puts multisum(5) == 8
+# Further Exploration:
+def multiple?(number, divisor)
+  number % divisor == 0
+end
+
+def multisum(num)
+  (1..num).inject(0) do |sum, n| 
+    multiple?(n, 3) || multiple?(n, 5) ? sum + n : sum
+  end
+end
+
+puts multisum(3) == 3
+puts multisum(5) == 8
 puts multisum(10) == 33
 puts multisum(1000) == 234168
