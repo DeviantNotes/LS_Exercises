@@ -45,6 +45,8 @@ end
 
 def print_in_box_wrapped(string)
   size = 0
+  idx1 = 0
+  idx2 = 75
   case size
   when size >= 76
     size = 76
@@ -53,14 +55,18 @@ def print_in_box_wrapped(string)
   end
   top_bottom_border(size)
   middle_rows(size)
-  text_row(string)
+  loop do
+    text_row(string[idx1..idx2])
+    idx1 += 76
+    idx2 += 76
+    break if idx1 > string.length
+  end
   middle_rows(size)
   top_bottom_border(size)
 end
 
 print_in_box('To boldly go where no one has gone before.')
 print_in_box('')
-print_in_box('Modify this method so it will truncate the message if it will be too wide to fit inside a standard terminal window (80 columns, including the sides of the box). For a real challenge, try word wrapping very long messages so they appear on multiple lines, but still within a box.')
 
 print_in_box_truncated('To boldly go where no one has gone before.')
 print_in_box_truncated('')
